@@ -1,0 +1,2 @@
+newspaper3k==0.2.8
+gradio==3.19.1
