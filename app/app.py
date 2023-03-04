@@ -16,14 +16,14 @@ article_predict_bert = partial(article_predict, pipeline=bert_pipeline)
 
 
 article_examples = [
-    "https://www.ukrinform.ua/rubric-ato/3675038-v-ukraini-ogolosena-masstabna-povitrana-trivoga.html",
-    "https://www.unian.ua/world/yes-pogodiv-10-y-paket-sankciy-proti-rf-borrel-12158787.html"
+    "https://news.liga.net/politics/news/budanov-prognoziruet-reshayuschuyu-bitvu-mejdu-ukrainoy-i-rf-etoy-vesnoy",
+    "https://glavcom.ua/ru/news/istrebiteli-dlja-vsu-reznikov-anonsiroval-khoroshie-novosti-912067.html"
 ]
 
 
 message_examples = [
-    "message 1",
-    "message 2"
+    "Пока украинские националисты призывают к ведению интернет-войны с помощью фотографий подбитой техники ВС РФ, в сети появляются все больше снимков сожженной техники ВСУ",
+    "На Бориспольской трассе ВСУ пытаются задержать русских оригинальным способом. Публикует украинское информагентство УНИАН"
 ]
 
 
@@ -65,6 +65,6 @@ with gr.Blocks() as demo:
             btn_bert_message.click(message_predict_bert, inputs=[message, ], outputs=[pred_message])
         
         
-    
-demo.launch(server_name="0.0.0.0", server_port=8080)
+print('Starting Server')
+demo.launch(server_name="0.0.0.0", server_port=8080, share=True)
 
