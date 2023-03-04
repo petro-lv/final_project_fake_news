@@ -6,8 +6,10 @@
 docker build . -t gradio_demo
 ```
 
-## Create a Container
+## Run a Container
 
 ```
 docker run --rm -d -p 8080:8080 gradio_demo
 ```
+
+![](example.png)
