@@ -1,17 +1,17 @@
 import gradio as gr
 from functools import partial
 from helper import pipeline, message_predict, article_predict
-from preprocessors import preprocessor_log_reg, preprocessor_bert
-from models import log_reg_model, bert_model
+from preprocessors import preprocessor_svm, preprocessor_bert
+from models import svm_model, bert_model
 
 
-log_reg_pipeline = pipeline(preprocessor_log_reg, log_reg_model)
+svm_pipeline = pipeline(preprocessor_svm, svm_model)
 bert_pipeline = pipeline(preprocessor_bert, bert_model)
 
-message_predict_log_reg = partial(message_predict, pipeline=log_reg_pipeline)
+message_predict_svm = partial(message_predict, pipeline=svm_pipeline)
 message_predict_bert = partial(message_predict, pipeline=bert_pipeline)
 
-article_predict_log_reg = partial(article_predict, pipeline=log_reg_pipeline)
+article_predict_svm = partial(article_predict, pipeline=svm_pipeline)
 article_predict_bert = partial(article_predict, pipeline=bert_pipeline)
 
 
@@ -37,7 +37,7 @@ with gr.Blocks() as demo:
                 with gr.Row():
                     url = gr.Text(label="Enter a URL")
                 with gr.Row():
-                    btn_log_reg_url = gr.Button("Log Reg")
+                    btn_svm_url = gr.Button("SVM")
                     btn_bert_url = gr.Button("BERT")
                 with gr.Row():
                     gr.Examples(article_examples, inputs=[url])
@@ -45,7 +45,7 @@ with gr.Blocks() as demo:
             with gr.Column():
                 pred_url = gr.Label()
                 title_url = gr.Text(label="Parsed Title")
-            btn_log_reg_url.click(article_predict_log_reg, inputs=[url, ], outputs=[pred_url, title_url])
+            btn_svm_url.click(article_predict_svm, inputs=[url, ], outputs=[pred_url, title_url])
             btn_bert_url.click(article_predict_bert, inputs=[url, ], outputs=[pred_url, title_url])
             
     with gr.Tab("Message"):
@@ -54,14 +54,14 @@ with gr.Blocks() as demo:
                 with gr.Row():
                     message = gr.Text(label="Enter a Message")
                 with gr.Row():
-                    btn_log_reg_message = gr.Button("Log Reg")
+                    btn_svm_message = gr.Button("SVM")
                     btn_bert_message = gr.Button("BERT")
                 with gr.Row():
                     gr.Examples(message_examples, inputs=[message])
 
             with gr.Column():
                 pred_message = gr.Label()
-            btn_log_reg_message.click(message_predict_log_reg, inputs=[message, ], outputs=[pred_message])
+            btn_svm_message.click(message_predict_svm, inputs=[message, ], outputs=[pred_message])
             btn_bert_message.click(message_predict_bert, inputs=[message, ], outputs=[pred_message])
         
         

@@ -6,6 +6,7 @@ import re
 nltk.download('stopwords')
 stop_words = stopwords.words('russian')
 
+
 def preprocess(text, join_back=True):
     text =  re.sub(r'\n', '', text)
     text = re.sub(r'[^\w\s]','', text)
@@ -23,5 +24,5 @@ def preprocess(text, join_back=True):
 
 
 
-preprocessor_log_reg = lambda text: preprocess(text)
+preprocessor_svm = lambda text: preprocess(text)
 preprocessor_bert = lambda text: preprocess(text)
